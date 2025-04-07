@@ -1,0 +1,25 @@
+{
+  "requiresCompatibilities": ["FARGATE"],
+  "family": "my-new-TaskDefinition-Prod",
+  "containerDefinitions": [
+    {
+      "name": "MyNewReactApp",
+      "image": "091912642030.dkr.ecr.us-east-2.amazonaws.com/my_new_image:latest",
+      "portMappings": [
+        {
+          "name": "ngnix-80-tcp",
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true
+    }
+  ],
+  "volumes": [],
+  "networkMode": "awsvpc",
+  "memory": "512",
+  "cpu": "256",
+  "executionRoleArn": "arn:aws:iam::091912642030:role/ecsTaskExecutionRole"
+}
