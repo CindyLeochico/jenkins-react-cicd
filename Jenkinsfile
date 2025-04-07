@@ -77,19 +77,20 @@ pipeline {
     steps {
         withCredentials([usernamePassword(credentialsId: 'my-temp', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
             sh '''
-                aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-                aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-                aws configure set region us-east-2
+                export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+                export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+                export AWS_DEFAULT_REGION=us-east-2
 
                 aws --version
                 aws s3 ls
 
                 echo "Hello S3!" > index.html
-                aws s3 cp index.html s3://temp-20250405/index.html --region us-east-2
+                aws s3 cp index.html s3://temp-20250405/index.html
             '''
         }
     }
 }
+
 
         }
     }
